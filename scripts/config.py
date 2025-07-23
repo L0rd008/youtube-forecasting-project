@@ -41,45 +41,47 @@ ADVANCED_FEATURES_ENABLED = os.getenv('ADVANCED_FEATURES_ENABLED', 'true').lower
 # Sri Lankan YouTube Channels by Category
 SRI_LANKAN_CHANNELS = {
     'news_media': {
-        'Ada Derana': 'UCjPRJXoVbOLCtcpYb8foUQw',
-        'Hiru News': 'UCDRlK2nf7b6n_GCdhqgdr_w',
-        'Sirasa TV': 'UCjQKyJVi_s6sIGWKr6mnhAg',
-        'TV Derana': 'UCbkjbWoS8g8pj2rJJbcn2Bg',
-        'ITN': 'UCcVdCg6XE2kYdeDVlxz0rPg',
-        'Rupavahini': 'UCBVBQp0AjqkGNrjFyNJKbfA',
-        'NewsFirst': 'UCrLBfWjp8MlZJNESPaFhtdw',
-        'Newswire': 'UCgLKhT-s5c7XnJBXHWGvgmw'
+        'Ada Derana': 'UCRDDfbYPHX_GUJ4lcQYTc8A',
+        'Hiru News': 'UCOtYyt7W5PmPnwQjWWF_Z-Q',
+        'Sirasa TV': 'UCn0XmAUFv6d2tofMFEesSNw',
+        'TV Derana': 'UCRDDfbYPHX_GUJ4lcQYTc8A',
+        'ITN': 'UCQTcNhAZidy1i9wwmdgf2Lw',
+        'Rupavahini': 'UCT83ymyAGm7Gnk_4ifxjxIA',
+        'NewsFirst': 'UCJpM66ypgqDMT-buL1ALuLA',
+        'Newswire': 'UCV-hall6WGCn1NY7dofVJJA'
     },
     'entertainment_music': {
-        'Wasthi Productions': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Siyatha TV': 'UCjQKyJVi_s6sIGWKr6mnhAg',
-        'Charana TV': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Ridma Weerawardena': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Sanuka Wickramasinghe': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Yureni Noshika': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Umaria': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'BnS': 'UCjA5jjMKxjJhJY8WqbZ8wKw'
+        'Wasthi Productions': 'UCMQYRNX1Fg-HJ8Ey7Z3WPrA',
+        'Siyatha TV': 'UCHhk9EHspPZejY9PnR1PLVg',
+        'Charana TV': 'UCmNv8608OO9T6pONDTipm0A',
+        'Ridma Weerawardena': 'UCYfYZgkolI8VpiIpL767N7g',
+        'Sanuka Wickramasinghe': 'UCPHWwelDVlaWqrT2F8qwmiA',
+        'Yureni Noshika': 'UC-mOUuQBUvlB94pjZdjB5ig',
+        'Umaria': 'UCWYXLMuL0m10w53wnMaUf3g',
+        'BnS': 'UCvivK4AwTrkPBnmrObTFxaQ'
     },
     'education': {
-        'Sinhala Edu': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Learn with Kasun': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Tech Sinhala': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Sinhala Tutorials': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Education Hub LK': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Learn IT Sinhala': 'UCjA5jjMKxjJhJY8WqbZ8wKw'
+        'Edu sinhalen': 'UCmzOKlGqbaaxVLzmlQ1xjwA',
+        'DP Education 1': 'UCaXHgF7cAdDElEtgG2XSjlw',
+        'DP Education 2': 'UC0CXMeU0432EMgBnlBaY_yA',
+        'Sinhala Tech': 'UCAhZgaf5PEpnStllKJRhvVg',
+        'Sinhala Guitar Lessons': 'UCzPYh2hr7QSSLs7gUX0ofFg',
+        'Ruchira Wijesena': 'UCR5y9OV23c0jJ4RGwDvGnLw',
+        'Darshana Ukuwela': 'UCSfrW0G4yQy587afT5uCxFQ'
     },
     'vlogs_lifestyle': {
-        'Ape Amma': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Sinhala Vlogs': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Travel with Chatura': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Cooking with Amma': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'SL Food Recipes': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Life in Sri Lanka': 'UCjA5jjMKxjJhJY8WqbZ8wKw'
+        'Ape Amma': 'UCtAv4S_gDY34sHW4vK0YvVw',
+        'Minoli Disanayaka': 'UCPHLNkCri7sfGt4IP2tUYfA',
+        'Thilini Nimeshi': 'UC3aHg03ut7j87ACMxy215_Q',
+        'Travel with Chatura': 'UCyzPvmM5qpGmAb48SXcikiw',
+        'Yash and Hass': 'UCAo_wAxH1WT6rFmK5yCd1Cg',
+        'Wild Cookbook': 'UC0jl0-twIcRptNHGnINyk9Q',
     },
     'sports': {
-        'Sri Lanka Cricket': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'SLC Official': 'UCjA5jjMKxjJhJY8WqbZ8wKw',
-        'Sports Hub LK': 'UCjA5jjMKxjJhJY8WqbZ8wKw'
+        'Sri Lanka Cricket': 'UCJA-NQ4MtcRIog66wziD8fA',
+        'Football Sri Lanka TV': 'UCl4MonVoWRx3HqAh3Efw2Jg',
+        'Sri Lankan Sports TV': 'UCrcATWZGF_p53r38i6VK0eA',
+        'Ceylon Sports': 'UCHySsgSdKQ3Ssq7lEN4i2-w',
     }
 }
 

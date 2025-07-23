@@ -7,6 +7,8 @@ import re
 import time
 import logging
 import pytz
+import os
+import sys
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any, Union
 from isodate import parse_duration
@@ -23,17 +25,104 @@ from config import (
     LOG_FILE_PATH
 )
 
+# Detect if we're on Windows and console doesn't support Unicode
+def _supports_unicode():
+    """Check if the current console supports Unicode characters"""
+    try:
+        # Try to encode some Unicode characters
+        test_chars = "🚀✅❌"
+        if sys.platform.startswith('win'):
+            # On Windows, check if we can encode to the console's encoding
+            console_encoding = sys.stdout.encoding or 'cp1252'
+            test_chars.encode(console_encoding)
+        return True
+    except (UnicodeEncodeError, AttributeError):
+        return False
+
+# Unicode-safe logging symbols
+UNICODE_SUPPORT = _supports_unicode()
+
+class LogSymbols:
+    """Platform-safe logging symbols"""
+    if UNICODE_SUPPORT:
+        ROCKET = "🚀"
+        SUCCESS = "✅"
+        ERROR = "❌"
+        WARNING = "⚠️"
+        INFO = "ℹ️"
+        STOP = "⏹️"
+        CLEANUP = "🧹"
+        TEST = "🧪"
+        CHART = "📊"
+        SEARCH = "🔍"
+        PROCESS = "🔄"
+    else:
+        ROCKET = "[START]"
+        SUCCESS = "[OK]"
+        ERROR = "[FAIL]"
+        WARNING = "[WARN]"
+        INFO = "[INFO]"
+        STOP = "[STOP]"
+        CLEANUP = "[CLEAN]"
+        TEST = "[TEST]"
+        CHART = "[CHART]"
+        SEARCH = "[SEARCH]"
+        PROCESS = "[PROC]"
+
 # Set up logging
 def setup_logging():
-    """Set up logging configuration"""
+    """Set up logging configuration with Windows-safe formatting"""
+    # Create a custom formatter that handles encoding issues
+    class SafeFormatter(logging.Formatter):
+        def format(self, record):
+            # Get the original formatted message
+            formatted = super().format(record)
+            
+            # If we don't support Unicode, replace common emoji with safe alternatives
+            if not UNICODE_SUPPORT:
+                replacements = {
+                    '🚀': LogSymbols.ROCKET,
+                    '✅': LogSymbols.SUCCESS,
+                    '❌': LogSymbols.ERROR,
+                    '⚠️': LogSymbols.WARNING,
+                    'ℹ️': LogSymbols.INFO,
+                    '⏹️': LogSymbols.STOP,
+                    '🧹': LogSymbols.CLEANUP,
+                    '🧪': LogSymbols.TEST,
+                    '📊': LogSymbols.CHART,
+                    '🔍': LogSymbols.SEARCH,
+                    '🔄': LogSymbols.PROCESS,
+                }
+                
+                for unicode_char, safe_char in replacements.items():
+                    formatted = formatted.replace(unicode_char, safe_char)
+            
+            return formatted
+    
+    # Set up handlers
+    handlers = []
+    
+    # File handler (always supports UTF-8)
+    file_handler = logging.FileHandler(LOG_FILE_PATH, encoding='utf-8')
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    ))
+    handlers.append(file_handler)
+    
+    # Console handler with safe formatting
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(SafeFormatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    ))
+    handlers.append(console_handler)
+    
+    # Configure logging
     logging.basicConfig(
         level=getattr(logging, LOG_LEVEL.upper()),
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.FileHandler(LOG_FILE_PATH),
-            logging.StreamHandler()
-        ]
+        handlers=handlers,
+        force=True  # Override any existing configuration
     )
+    
     return logging.getLogger(__name__)
 
 logger = setup_logging()

@@ -230,6 +230,11 @@ class DataProcessor:
         
         # Days since publication
         current_time = datetime.now()
+        # Make current_time timezone-aware to match published_at
+        if df['published_at'].dt.tz is not None:
+            import pytz
+            current_time = current_time.replace(tzinfo=pytz.UTC)
+        
         df['days_since_published'] = (current_time - df['published_at']).dt.days
         df['weeks_since_published'] = df['days_since_published'] / 7
         
