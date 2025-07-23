@@ -36,86 +36,54 @@ youtube-forecasting-project/
 
 ## 🚀 Quick Start
 
-### Prerequisites
+> 📖 **For detailed installation and usage instructions, see [USAGE_GUIDE.md](USAGE_GUIDE.md)**
 
-- Python 3.8 or higher
-- YouTube Data API v3 key
-- Git
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd youtube-forecasting-project
-   ```
-
-2. **Create virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Set up environment variables**
-   ```bash
-   cp .env.template .env
-   # Edit .env file and add your YouTube API key
-   ```
-
-5. **Get YouTube API Key**
-   - Go to [Google Cloud Console](https://console.developers.google.com/)
-   - Create a new project or select existing one
-   - Enable YouTube Data API v3
-   - Create credentials (API Key)
-   - Add the key to your `.env` file
-
-## 📊 Data Collection
-
-### Collect Video Data
+### 30-Second Setup
 
 ```bash
-# Collect videos from all configured Sri Lankan channels
-python scripts/collect_videos.py
+# Clone and setup
+git clone https://github.com/L0rd008/youtube-forecasting-project.git
+cd youtube-forecasting-project
+pip install -r requirements.txt
 
-# Collect from specific category
-python scripts/collect_videos.py --category news_media
+# Configure API key
+cp .env.template .env
+# Edit .env file with your YouTube API key
 
-# Collect recent videos only (last 7 days)
-python scripts/collect_videos.py --recent 7
-
-# Limit videos per channel
-python scripts/collect_videos.py --max-videos 25
+# Test the system
+python scripts/collect_videos.py --max-videos 20
+python scripts/process_data.py
+streamlit run dashboard/app.py
 ```
 
-### Track Performance
+### Get YouTube API Key
+1. Visit [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable YouTube Data API v3
+3. Create API key credentials
+4. Add to `.env` file
 
+> 🔧 **Need help?** Check the [troubleshooting section](USAGE_GUIDE.md#troubleshooting) in the usage guide.
+
+## 📊 Core Functionality
+
+The system provides three main operations:
+
+1. **Data Collection**: Automated video metadata collection from Sri Lankan YouTube channels
+2. **Performance Tracking**: Monitor view/like/comment growth over time  
+3. **Data Processing**: Feature engineering and ML-ready dataset creation
+
+> 📖 **For detailed command options and usage examples, see [USAGE_GUIDE.md](USAGE_GUIDE.md#data-collection)**
+
+### Basic Commands
 ```bash
-# Track performance of recent videos
+# Collect recent videos
+python scripts/collect_videos.py --max-videos 25
+
+# Track performance changes
 python scripts/track_performance.py
 
-# Track specific videos
-python scripts/track_performance.py --video-ids VIDEO_ID1 VIDEO_ID2
-
-# Track videos from last 14 days
-python scripts/track_performance.py --days-back 14
-```
-
-### Process Data
-
-```bash
-# Full data processing with feature engineering
+# Process and engineer features
 python scripts/process_data.py
-
-# Skip sentiment analysis (faster)
-python scripts/process_data.py --no-sentiment
-
-# Skip performance features
-python scripts/process_data.py --no-snapshots
 ```
 
 ## 🔧 Configuration
