@@ -1,0 +1,49 @@
+# YouTube Data API
+google-api-python-client==2.108.0
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+
+# Data Processing
+pandas==2.1.4
+numpy==1.24.4
+scipy==1.11.4
+
+# Text Processing & Sentiment Analysis
+textblob==0.17.1
+nltk==3.8.1
+
+# Scheduling & Task Management
+schedule==1.2.0
+APScheduler==3.10.4
+
+# Environment Management
+python-dotenv==1.0.0
+
+# Web Framework for Dashboard
+streamlit==1.28.2
+plotly==5.17.0
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# Database Support (Optional)
+sqlite3
+
+# Utilities
+requests==2.31.0
+pytz==2023.3
+isodate==0.6.1
+tqdm==4.66.1
+
+# Logging
+colorlog==6.8.0
+
+# Data Validation
+pydantic==2.5.2
+
+# Machine Learning (for future forecasting models)
+scikit-learn==1.3.2
+xgboost==2.0.2
+
+# Jupyter for Analysis
+jupyter==1.0.0
+ipykernel==6.27.1
