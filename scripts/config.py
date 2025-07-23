@@ -43,22 +43,25 @@ SRI_LANKAN_CHANNELS = {
     'news_media': {
         'Ada Derana': 'UCRDDfbYPHX_GUJ4lcQYTc8A',
         'Hiru News': 'UCOtYyt7W5PmPnwQjWWF_Z-Q',
-        'Sirasa TV': 'UCn0XmAUFv6d2tofMFEesSNw',
-        'TV Derana': 'UCRDDfbYPHX_GUJ4lcQYTc8A',
-        'ITN': 'UCQTcNhAZidy1i9wwmdgf2Lw',
-        'Rupavahini': 'UCT83ymyAGm7Gnk_4ifxjxIA',
         'NewsFirst': 'UCJpM66ypgqDMT-buL1ALuLA',
         'Newswire': 'UCV-hall6WGCn1NY7dofVJJA'
     },
-    'entertainment_music': {
-        'Wasthi Productions': 'UCMQYRNX1Fg-HJ8Ey7Z3WPrA',
-        'Siyatha TV': 'UCHhk9EHspPZejY9PnR1PLVg',
-        'Charana TV': 'UCmNv8608OO9T6pONDTipm0A',
+    'music': {
         'Ridma Weerawardena': 'UCYfYZgkolI8VpiIpL767N7g',
         'Sanuka Wickramasinghe': 'UCPHWwelDVlaWqrT2F8qwmiA',
         'Yureni Noshika': 'UC-mOUuQBUvlB94pjZdjB5ig',
         'Umaria': 'UCWYXLMuL0m10w53wnMaUf3g',
         'BnS': 'UCvivK4AwTrkPBnmrObTFxaQ'
+    },
+    'entertainment': {
+        'Blok & Dino': 'UCTcATaNqlaCF4zkZp29BJRQ',
+        'Siyatha TV': 'UCHhk9EHspPZejY9PnR1PLVg',
+        'Charana TV': 'UCmNv8608OO9T6pONDTipm0A',
+        'Wasthi Productions': 'UCMQYRNX1Fg-HJ8Ey7Z3WPrA',
+        'Sirasa TV': 'UCn0XmAUFv6d2tofMFEesSNw',
+        'TV Derana': 'UCRDDfbYPHX_GUJ4lcQYTc8A',
+        'ITN': 'UCQTcNhAZidy1i9wwmdgf2Lw',
+        'Rupavahini': 'UCT83ymyAGm7Gnk_4ifxjxIA',
     },
     'education': {
         'Edu sinhalen': 'UCmzOKlGqbaaxVLzmlQ1xjwA',
@@ -67,7 +70,9 @@ SRI_LANKAN_CHANNELS = {
         'Sinhala Tech': 'UCAhZgaf5PEpnStllKJRhvVg',
         'Sinhala Guitar Lessons': 'UCzPYh2hr7QSSLs7gUX0ofFg',
         'Ruchira Wijesena': 'UCR5y9OV23c0jJ4RGwDvGnLw',
-        'Darshana Ukuwela': 'UCSfrW0G4yQy587afT5uCxFQ'
+        'Darshana Ukuwela': 'UCSfrW0G4yQy587afT5uCxFQ',
+        'Dinesh Muthugala': 'UCUz06yHz7YZWF737tof7rYQ',
+        'Raamuwa': 'UCY7Gd6C6q74h11ZAbie8xoQ',
     },
     'vlogs_lifestyle': {
         'Ape Amma': 'UCtAv4S_gDY34sHW4vK0YvVw',
@@ -76,12 +81,24 @@ SRI_LANKAN_CHANNELS = {
         'Travel with Chatura': 'UCyzPvmM5qpGmAb48SXcikiw',
         'Yash and Hass': 'UCAo_wAxH1WT6rFmK5yCd1Cg',
         'Wild Cookbook': 'UC0jl0-twIcRptNHGnINyk9Q',
+        'Saaraa’s Japan Diaries': 'UCIG2lbAXX9hkj8AbjVJlhkg',
+        'SharaDh': 'UCZ246KOECqjh9TTPk5Sf86w',
+        'Samee and Sandu':'UCDkGNkHKVxQ7PRk5D0migrw',
+        'Solo Hiker': 'UCBkyh-TXXmPpTjAXiklLoEA',
+        'kavindu karunarathne': 'UC56HPjeRngN3-2LSNlp80yQ',
+        'Yohani Hettiarachchi': 'UCULeO4zpJMcG3kQI8iZ9PCw',
+        'Man Saranna': 'UCGe9vzavXCSu7GBIgoPebeQ',
+        'Dinesh A Pathum': 'UCN2GByhXeLkilxHV45JwA-A',
+        'Ginger Family': 'UCh3ZGM0EBlcKSa4ZzUEfAOw',
+        'Pawani Perera': 'UCjW1eTO3QBPr1M_Z7UA0crA',
+        'Seri saranna': 'UCORaJXeMZxCvf-z4_fdGZlg'
+        
     },
     'sports': {
         'Sri Lanka Cricket': 'UCJA-NQ4MtcRIog66wziD8fA',
         'Football Sri Lanka TV': 'UCl4MonVoWRx3HqAh3Efw2Jg',
         'Sri Lankan Sports TV': 'UCrcATWZGF_p53r38i6VK0eA',
-        'Ceylon Sports': 'UCHySsgSdKQ3Ssq7lEN4i2-w',
+        'Ceylon Sports': 'UCHySsgSdKQ3Ssq7lEN4i2-w'
     }
 }
 
