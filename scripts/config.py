@@ -92,7 +92,6 @@ SRI_LANKAN_CHANNELS = {
         'Ginger Family': 'UCh3ZGM0EBlcKSa4ZzUEfAOw',
         'Pawani Perera': 'UCjW1eTO3QBPr1M_Z7UA0crA',
         'Seri saranna': 'UCORaJXeMZxCvf-z4_fdGZlg'
-        
     },
     'sports': {
         'Sri Lanka Cricket': 'UCJA-NQ4MtcRIog66wziD8fA',
@@ -109,6 +108,9 @@ for category, channels in SRI_LANKAN_CHANNELS.items():
 
 # Remove duplicates
 ALL_CHANNEL_IDS = list(set(ALL_CHANNEL_IDS))
+
+# Channel categories (derived from SRI_LANKAN_CHANNELS keys)
+CHANNEL_CATEGORIES = list(SRI_LANKAN_CHANNELS.keys())
 
 # YouTube API Endpoints
 YOUTUBE_ENDPOINTS = {
@@ -217,6 +219,7 @@ def get_quota_cost(endpoint: str, parts: List[str]) -> int:
 __all__ = [
     'YOUTUBE_API_KEY',
     'SRI_LANKAN_CHANNELS',
+    'CHANNEL_CATEGORIES',
     'ALL_CHANNEL_IDS',
     'COLLECTION_PARAMS',
     'FEATURE_PARAMS',
