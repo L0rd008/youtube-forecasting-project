@@ -359,12 +359,15 @@ class YouTubeAPIManager:
         self.api_keys = self._load_api_keys()
         self.current_key_index = 0
         self.quota_usage = {}
-        self.rate_limited_keys = set()
+        self.rate_limited_keys = {}  # Changed to dict to track timestamps
         self.service = None
-        self._initialize_service()
         
         if not self.api_keys:
             raise ValueError("No YouTube API keys found in .env file")
+        
+        # Find the first working key instead of blindly starting with key 0
+        if not self._find_working_key():
+            raise ValueError("No working API keys available")
     
     def _load_api_keys(self) -> List[str]:
         """Load all available API keys from environment"""
@@ -388,8 +391,110 @@ class YouTubeAPIManager:
         logger.info(f"Loaded {len(keys)} API keys")
         return keys
     
+    def _is_quota_reset_time(self) -> bool:
+        """Check if it's past the daily quota reset time (midnight PT)"""
+        try:
+            import pytz
+            
+            # YouTube quotas reset at midnight Pacific Time
+            pt_tz = pytz.timezone('US/Pacific')
+            current_pt = datetime.now(pt_tz)
+            
+            # If it's past midnight PT today, quotas should be reset
+            midnight_pt_today = current_pt.replace(hour=0, minute=0, second=0, microsecond=0)
+            
+            return current_pt >= midnight_pt_today
+        except ImportError:
+            # If pytz is not available, assume quotas might have reset after 24 hours
+            return True
+    
+    def _clean_expired_rate_limits(self):
+        """Remove API keys from rate limited set if quota has reset"""
+        try:
+            import pytz
+            pt_tz = pytz.timezone('US/Pacific')
+            current_pt = datetime.now(pt_tz)
+            midnight_pt_today = current_pt.replace(hour=0, minute=0, second=0, microsecond=0)
+            
+            # Remove keys that were rate limited before today's reset
+            keys_to_remove = []
+            for key, timestamp in self.rate_limited_keys.items():
+                if timestamp < midnight_pt_today:
+                    keys_to_remove.append(key)
+            
+            for key in keys_to_remove:
+                del self.rate_limited_keys[key]
+                logger.info(f"Removed API key from rate limit (quota reset): {key[:10]}...")
+                
+        except ImportError:
+            # If pytz is not available, remove keys older than 24 hours
+            current_time = datetime.now()
+            keys_to_remove = []
+            for key, timestamp in self.rate_limited_keys.items():
+                if (current_time - timestamp).total_seconds() > 24 * 3600:
+                    keys_to_remove.append(key)
+            
+            for key in keys_to_remove:
+                del self.rate_limited_keys[key]
+                logger.info(f"Removed API key from rate limit (24h expired): {key[:10]}...")
+    
+    def _test_key(self, key_index):
+        """Test if a specific API key works"""
+        try:
+            key = self.api_keys[key_index]
+            service = build('youtube', 'v3', developerKey=key)
+            
+            # Try a minimal operation to test quota
+            response = service.search().list(
+                part='snippet',
+                q='test',
+                type='channel',
+                regionCode='LK',
+                maxResults=1,
+                order='relevance'
+            ).execute()
+            
+            return True, service
+            
+        except HttpError as e:
+            if e.resp.status == 403 and 'quotaExceeded' in str(e):
+                logger.info(f"API key {key_index + 1} quota exhausted during initialization")
+                try:
+                    import pytz
+                    current_time = datetime.now(pytz.UTC)
+                except ImportError:
+                    current_time = datetime.now()
+                self.rate_limited_keys[self.api_keys[key_index]] = current_time
+                return False, None
+            else:
+                logger.warning(f"API key {key_index + 1} error during test: {e}")
+                return False, None
+        except Exception as e:
+            logger.warning(f"API key {key_index + 1} exception during test: {e}")
+            return False, None
+
+    def _find_working_key(self):
+        """Find the first working API key during initialization"""
+        logger.info("Finding first working API key...")
+        
+        for i in range(len(self.api_keys)):
+            logger.debug(f"Testing API key {i + 1}...")
+            works, service = self._test_key(i)
+            
+            if works:
+                self.current_key_index = i
+                self.service = service
+                logger.info(f"Initialized API service with key {i + 1}")
+                return True
+        
+        logger.error("No working API keys found during initialization")
+        return False
+
     def _initialize_service(self):
         """Initialize YouTube API service with current key"""
+        # Clean expired rate limits before initializing
+        self._clean_expired_rate_limits()
+        
         if self.current_key_index < len(self.api_keys):
             current_key = self.api_keys[self.current_key_index]
             if current_key not in self.rate_limited_keys:
@@ -403,16 +508,33 @@ class YouTubeAPIManager:
     
     def _rotate_key(self) -> bool:
         """Rotate to next available API key"""
-        self.current_key_index += 1
-        if self.current_key_index >= len(self.api_keys):
-            self.current_key_index = 0
+        # Clean expired rate limits before rotating
+        self._clean_expired_rate_limits()
         
-        # Check if we've tried all keys
-        if len(self.rate_limited_keys) >= len(self.api_keys):
-            logger.error("All API keys are rate limited")
-            return False
+        original_index = self.current_key_index
+        attempts = 0
+        max_attempts = len(self.api_keys)
         
-        return self._initialize_service()
+        while attempts < max_attempts:
+            self.current_key_index = (self.current_key_index + 1) % len(self.api_keys)
+            attempts += 1
+            
+            current_key = self.api_keys[self.current_key_index]
+            
+            # Check if this key is not rate limited
+            if current_key not in self.rate_limited_keys:
+                if self._initialize_service():
+                    logger.info(f"Successfully rotated to API key {self.current_key_index + 1}")
+                    return True
+            
+            # If we've tried all keys, break
+            if self.current_key_index == original_index:
+                break
+        
+        # If we get here, all keys are rate limited
+        logger.error("All API keys are currently rate limited")
+        self.service = None
+        return False
     
     def make_request(self, request_func, **kwargs):
         """Make API request with automatic key rotation on rate limit"""
@@ -437,7 +559,14 @@ class YouTubeAPIManager:
             except HttpError as e:
                 if e.resp.status == 403 and 'quotaExceeded' in str(e):
                     logger.warning(f"API key {self.current_key_index + 1} quota exceeded")
-                    self.rate_limited_keys.add(self.api_keys[self.current_key_index])
+                    # Store timestamp when key was rate limited (timezone-aware)
+                    try:
+                        import pytz
+                        current_time = datetime.now(pytz.UTC)
+                    except ImportError:
+                        current_time = datetime.now()
+                    
+                    self.rate_limited_keys[self.api_keys[self.current_key_index]] = current_time
                     self.service = None
                     
                     if not self._rotate_key():

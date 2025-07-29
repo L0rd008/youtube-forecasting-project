@@ -19,6 +19,7 @@ import json
 
 from config import (
     YOUTUBE_API_KEY, 
+    YOUTUBE_API_KEYS,
     TIMEZONE, 
     COLLECTION_PARAMS,
     LOG_LEVEL,
@@ -128,23 +129,66 @@ def setup_logging():
 logger = setup_logging()
 
 class YouTubeAPIClient:
-    """YouTube API client with rate limiting and error handling"""
+    """YouTube API client with multi-key rotation, rate limiting and error handling"""
     
-    def __init__(self, api_key: str = YOUTUBE_API_KEY):
-        self.api_key = api_key
+    def __init__(self, api_keys: List[str] = None):
+        self.api_keys = api_keys or YOUTUBE_API_KEYS
+        if not self.api_keys:
+            raise ValueError("No valid API keys found. Please check your .env file.")
+        
+        self.current_key_index = 0
+        self.current_key = self.api_keys[0]
         self.service = None
         self.quota_used = 0
         self.last_request_time = 0
+        self.key_quotas = {key: 0 for key in self.api_keys}  # Track quota per key
+        self.exhausted_keys = set()  # Track exhausted keys
+        
         self._initialize_service()
+        logger.info(f"Initialized YouTube API client with {len(self.api_keys)} API key(s)")
     
     def _initialize_service(self):
-        """Initialize YouTube API service"""
+        """Initialize YouTube API service with current key"""
         try:
-            self.service = build('youtube', 'v3', developerKey=self.api_key)
-            logger.info("YouTube API service initialized successfully")
+            if not self.current_key:
+                raise ValueError("Invalid or missing YouTube API key. Please check your .env file.")
+            
+            self.service = build('youtube', 'v3', developerKey=self.current_key)
+            logger.info(f"YouTube API service initialized with key {self.current_key_index + 1}")
         except Exception as e:
             logger.error(f"Failed to initialize YouTube API service: {e}")
             raise
+    
+    def _rotate_api_key(self):
+        """Rotate to next available API key"""
+        if len(self.api_keys) <= 1:
+            logger.warning("Only one API key available, cannot rotate")
+            return False
+        
+        # Find next non-exhausted key
+        original_index = self.current_key_index
+        attempts = 0
+        
+        while attempts < len(self.api_keys):
+            self.current_key_index = (self.current_key_index + 1) % len(self.api_keys)
+            next_key = self.api_keys[self.current_key_index]
+            
+            if next_key not in self.exhausted_keys:
+                self.current_key = next_key
+                self._initialize_service()
+                logger.info(f"Rotated to API key {self.current_key_index + 1}")
+                return True
+            
+            attempts += 1
+        
+        # All keys exhausted
+        logger.error("All API keys have been exhausted")
+        return False
+    
+    def _mark_key_exhausted(self, key: str):
+        """Mark an API key as quota exhausted"""
+        self.exhausted_keys.add(key)
+        logger.warning(f"API key {self.api_keys.index(key) + 1} marked as exhausted")
     
     def _rate_limit(self):
         """Implement rate limiting between requests"""
@@ -159,7 +203,7 @@ class YouTubeAPIClient:
         self.last_request_time = time.time()
     
     def _make_request(self, request, quota_cost: int = 1):
-        """Make API request with error handling and retry logic"""
+        """Make API request with error handling, retry logic, and key rotation"""
         max_retries = COLLECTION_PARAMS['max_retries']
         retry_delay = COLLECTION_PARAMS['retry_delay']
         
@@ -167,8 +211,12 @@ class YouTubeAPIClient:
             try:
                 self._rate_limit()
                 response = request.execute()
+                
+                # Update quota tracking
                 self.quota_used += quota_cost
-                logger.debug(f"API request successful. Quota used: {self.quota_used}")
+                self.key_quotas[self.current_key] += quota_cost
+                
+                logger.debug(f"API request successful. Total quota used: {self.quota_used}, Current key quota: {self.key_quotas[self.current_key]}")
                 return response
                 
             except HttpError as e:
@@ -176,17 +224,34 @@ class YouTubeAPIClient:
                 error_message = str(e)
                 
                 if error_code == 403 and 'quotaExceeded' in error_message:
-                    logger.error("YouTube API quota exceeded")
-                    raise Exception("API quota exceeded. Please try again tomorrow.")
+                    logger.warning(f"API key {self.current_key_index + 1} quota exceeded")
+                    self._mark_key_exhausted(self.current_key)
+                    
+                    # Try to rotate to next key
+                    if self._rotate_api_key():
+                        logger.info("Retrying with new API key...")
+                        # Rebuild the request with new service
+                        continue
+                    else:
+                        logger.error("All API keys exhausted. Please try again tomorrow.")
+                        raise Exception("All API keys exhausted. Please try again tomorrow.")
                 
-                elif error_code == 403 and 'forbidden' in error_message.lower():
-                    logger.error(f"Access forbidden: {error_message}")
-                    raise Exception("Access forbidden. Check API key permissions.")
+                elif error_code == 403 and ('keyInvalid' in error_message or 'forbidden' in error_message.lower()):
+                    logger.error(f"Invalid API key {self.current_key_index + 1}: {error_message}")
+                    self._mark_key_exhausted(self.current_key)
+                    
+                    # Try to rotate to next key
+                    if self._rotate_api_key():
+                        logger.info("Retrying with new API key...")
+                        continue
+                    else:
+                        logger.error("No valid API keys available")
+                        raise Exception("Invalid or missing YouTube API key. Please check your .env file.")
                 
                 elif error_code in [500, 502, 503, 504]:
-                    # Server errors - retry
+                    # Server errors - retry with exponential backoff
                     if attempt < max_retries - 1:
-                        wait_time = retry_delay * (2 ** attempt)  # Exponential backoff
+                        wait_time = retry_delay * (2 ** attempt)
                         logger.warning(f"Server error {error_code}. Retrying in {wait_time}s...")
                         time.sleep(wait_time)
                         continue
@@ -209,6 +274,23 @@ class YouTubeAPIClient:
                     raise
         
         return None
+    
+    def get_quota_status(self) -> Dict:
+        """Get current quota usage status"""
+        return {
+            'total_quota_used': self.quota_used,
+            'key_quotas': self.key_quotas.copy(),
+            'current_key_index': self.current_key_index,
+            'exhausted_keys': len(self.exhausted_keys),
+            'available_keys': len(self.api_keys) - len(self.exhausted_keys)
+        }
+    
+    def reset_quota_tracking(self):
+        """Reset quota tracking (call this daily)"""
+        self.quota_used = 0
+        self.key_quotas = {key: 0 for key in self.api_keys}
+        self.exhausted_keys.clear()
+        logger.info("Quota tracking reset")
 
 # YouTube API Helper Functions
 def get_channel_info(client: YouTubeAPIClient, channel_ids: List[str]) -> List[Dict]:

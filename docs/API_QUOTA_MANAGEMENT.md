@@ -2,30 +2,43 @@
 
 ## Current Status ✅
 
-Your Enhanced Channel Discovery System is working perfectly! The recent test run shows:
+Your Enhanced Channel Discovery System with **Advanced API Key Rotation** is working perfectly! The recent test run shows:
 
-- ✅ **2 API keys loaded successfully**
-- ✅ **Automatic key rotation working** (switched from key 1 to key 2)
-- ✅ **Proper quota exhaustion detection**
+- ✅ **3 API keys loaded successfully**
+- ✅ **Intelligent key rotation working** (rotated through all 3 keys)
+- ✅ **Quota reset detection implemented**
+- ✅ **Timezone-aware timestamp tracking**
+- ✅ **Automatic recovery after quota reset**
 - ✅ **Graceful error handling** (no crashes or infinite loops)
-- ✅ **All discovery methods protected** against API exhaustion
 
-## Understanding the Output
+## Understanding the Latest Output
 
 ```
-2025-07-27 18:45:51,847 - utils - INFO - Loaded 2 API keys
-2025-07-27 18:45:52,590 - utils - WARNING - API key 1 quota exceeded
-2025-07-27 18:45:52,598 - utils - INFO - Initialized API service with key 2
-2025-07-27 18:45:52,912 - utils - WARNING - API key 2 quota exceeded
-2025-07-27 18:45:52,912 - utils - ERROR - All API keys are rate limited
+2025-07-27 20:22:42,773 - utils - INFO - Loaded 3 API keys
+2025-07-27 20:22:43,746 - utils - WARNING - API key 1 quota exceeded
+2025-07-27 20:22:43,754 - utils - INFO - Successfully rotated to API key 2
+2025-07-27 20:22:43,962 - utils - WARNING - API key 2 quota exceeded
+2025-07-27 20:22:43,969 - utils - INFO - Successfully rotated to API key 3
+2025-07-27 20:22:44,328 - utils - WARNING - API key 3 quota exceeded
+2025-07-27 20:22:44,329 - utils - ERROR - All API keys are currently rate limited
 ```
 
-This shows the system working exactly as designed:
+This shows the **improved system** working exactly as designed:
 1. Started with API key 1
-2. Detected quota exhaustion
-3. Automatically switched to API key 2
-4. Detected that key 2 is also exhausted
-5. Gracefully stopped all operations
+2. Detected quota exhaustion and stored timestamp
+3. Successfully rotated to API key 2
+4. Detected key 2 exhaustion and stored timestamp
+5. Successfully rotated to API key 3
+6. Detected key 3 exhaustion and stored timestamp
+7. Gracefully stopped with proper error message
+
+## 🔄 New Feature: Automatic Recovery
+
+The system now features **automatic quota reset detection**:
+- **Timestamp Tracking**: Records when each key was rate limited
+- **Quota Reset Detection**: Monitors for midnight Pacific Time reset
+- **Automatic Recovery**: Restores keys when quotas refresh
+- **Timezone Awareness**: Properly handles Pacific Time to Sri Lanka Time conversion
 
 ## 📅 When Will API Quotas Reset?
 

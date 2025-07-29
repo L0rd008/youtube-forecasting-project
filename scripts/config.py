@@ -11,7 +11,29 @@ from typing import List, Dict
 load_dotenv()
 
 # YouTube API Configuration
-YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY', 'your_youtube_api_key_here')
+def get_all_api_keys():
+    """Load all available API keys from environment variables"""
+    keys = []
+    
+    # Check for primary key
+    primary_key = os.getenv('YOUTUBE_API_KEY')
+    if primary_key and primary_key != 'your_youtube_api_key_here':
+        keys.append(primary_key)
+    
+    # Check for numbered keys
+    i = 1
+    while True:
+        key = os.getenv(f'YOUTUBE_API_KEY_{i}')
+        if key and key != 'your_youtube_api_key_here':
+            keys.append(key)
+            i += 1
+        else:
+            break
+    
+    return keys
+
+YOUTUBE_API_KEYS = get_all_api_keys()
+YOUTUBE_API_KEY = YOUTUBE_API_KEYS[0] if YOUTUBE_API_KEYS else 'your_youtube_api_key_here'
 YOUTUBE_API_BASE_URL = os.getenv('YOUTUBE_API_BASE_URL', 'https://www.googleapis.com/youtube/v3/')
 MAX_RESULTS_PER_REQUEST = int(os.getenv('MAX_RESULTS_PER_REQUEST', 50))
 DAILY_QUOTA_LIMIT = int(os.getenv('DAILY_QUOTA_LIMIT', 10000))
