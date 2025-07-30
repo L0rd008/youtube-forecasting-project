@@ -15,14 +15,14 @@ This document summarizes the comprehensive analysis and improvements made to the
 - **Found 3 redundant scripts** with similar functionality:
   - `collect_channels_unlimited.py` (original unlimited discovery)
   - `collect_channels_unlimited_fixed.py` (attempted fix)
-  - `advanced_channel_discovery.py` (enhanced version)
+  - `channel_discovery.py` (enhanced version)
 - **Identified duplicate code patterns** and inconsistent implementations
 - **Analyzed feature overlap** between different discovery approaches
 
 ## Major Improvements Implemented
 
 ### 1. Enhanced Advanced Discovery System
-**File**: `scripts/advanced_channel_discovery.py`
+**File**: `scripts/channel_discovery.py`
 
 #### New Features Added:
 - **YouTube Autocomplete Integration**: Expands keywords using YouTube's suggestion API
@@ -146,13 +146,13 @@ class AdvancedChannelDiscovery:
 ### Basic Usage
 ```bash
 # Enhanced discovery with default settings
-python scripts/advanced_channel_discovery.py --target 100
+python scripts/channel_discovery.py --target 100
 
 # Enable debug mode for detailed logging
-python scripts/advanced_channel_discovery.py --target 50 --debug
+python scripts/channel_discovery.py --target 50 --debug
 
 # Custom output directory
-python scripts/advanced_channel_discovery.py --target 75 --output-dir custom_output
+python scripts/channel_discovery.py --target 75 --output-dir custom_output
 ```
 
 ### Advanced Usage
@@ -205,7 +205,7 @@ The enhanced advanced discovery system now provides a comprehensive, scalable, a
 ## Files Modified/Created
 
 ### Modified Files:
-- `scripts/advanced_channel_discovery.py` - Enhanced with new features
+- `scripts/channel_discovery.py` - Enhanced with new features
 - `README.md` - Updated documentation and command examples
 
 ### Deleted Files:

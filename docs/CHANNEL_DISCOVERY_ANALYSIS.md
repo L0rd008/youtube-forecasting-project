@@ -47,7 +47,7 @@ Our testing revealed that the "duplicate detection issue" was actually the syste
 
 ### 1. Advanced Channel Discovery System
 
-Created `scripts/advanced_channel_discovery.py` with sophisticated techniques for finding NEW channels:
+Created `scripts/channel_discovery.py` with sophisticated techniques for finding NEW channels:
 
 #### Advanced Techniques Implemented:
 
@@ -137,7 +137,7 @@ class AdvancedKeywordEngine:
 
 ### 1. Immediate Actions
 
-1. **Use Advanced Discovery System**: Run `advanced_channel_discovery.py` when quotas are available
+1. **Use Advanced Discovery System**: Run `channel_discovery.py` when quotas are available
 2. **Schedule Regular Runs**: Set up automated runs during quota reset times
 3. **Monitor Performance**: Track success rates by technique
 
@@ -158,7 +158,7 @@ class AdvancedKeywordEngine:
 
 ### Basic Advanced Discovery
 ```bash
-python scripts/advanced_channel_discovery.py --target 50
+python scripts/channel_discovery.py --target 50
 ```
 
 ### Debug Mode Testing
