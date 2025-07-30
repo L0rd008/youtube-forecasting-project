@@ -29,8 +29,8 @@ youtube-forecasting-project/
 ├── 📁 scripts/                       # Core application logic
 │   ├── config.py                     # System configuration
 │   ├── utils.py                      # Shared utilities
-│   ├── collect_channels.py           # Channel discovery
-│   ├── collect_channels_unlimited.py # Advanced discovery
+│   ├── collect_channels.py           # Basic channel discovery
+│   ├── advanced_channel_discovery.py # Enhanced advanced discovery system
 │   ├── collect_videos.py             # Video data collection
 │   ├── track_performance.py          # Performance monitoring
 │   ├── process_data.py               # Data processing pipeline
@@ -90,16 +90,31 @@ streamlit run dashboard/app.py
 
 ## 📊 Core Functionality
 
-The system provides three main operations:
+The system provides comprehensive YouTube data collection and analysis with **1,372 Sri Lankan channels** already discovered across 12 categories:
 
-1. **Data Collection**: Automated video metadata collection from Sri Lankan YouTube channels
-2. **Performance Tracking**: Monitor view/like/comment growth over time  
-3. **Data Processing**: Feature engineering and ML-ready dataset creation
+1. **Advanced Channel Discovery**: Find new channels using sophisticated techniques
+2. **Data Collection**: Automated video metadata collection from Sri Lankan YouTube channels
+3. **Performance Tracking**: Monitor view/like/comment growth over time  
+4. **Data Processing**: Feature engineering and ML-ready dataset creation
+
+### Current Database Status
+- **✅ 1,372 Sri Lankan YouTube channels discovered**
+- **📂 12 content categories covered**
+- **🎯 Advanced discovery system for continued growth**
+
+**Category Breakdown**:
+- People & Blogs: 290 channels | Entertainment: 226 channels | Travel & Events: 212 channels
+- Music: 193 channels | News & Politics: 147 channels | Howto & Style: 94 channels
+- Science & Technology: 78 channels | Education: 73 channels | Gaming: 31 channels
+- Sports: 26 channels | Film & Animation: 1 channel | Pets & Animals: 1 channel
 
 ### Basic Commands
 ```bash
-# Discover new Sri Lankan channels (Enhanced Discovery)
-python scripts/collect_channels.py --expand-keywords --max-results 500
+# Advanced discovery for NEW channels (recommended)
+python scripts/advanced_channel_discovery.py --target 50
+
+# Test deduplication system
+python scripts/test_deduplication_fix.py
 
 # Collect recent videos
 python scripts/collect_videos.py --max-videos 50
@@ -116,14 +131,14 @@ python scripts/scheduler.py --daemon
 
 ### Advanced Discovery Commands
 ```bash
-# Intelligent keyword expansion (20 → 500+ keywords)
-python scripts/collect_channels.py --expand-keywords --max-results 1000
+# NEW: Enhanced advanced discovery system (finds 794+ potential new channels)
+python scripts/advanced_channel_discovery.py --target 100
 
-# Location-based comprehensive discovery
-python scripts/collect_channels.py --location-search --max-results 500
+# Enable debug mode for detailed logging
+python scripts/advanced_channel_discovery.py --target 50 --debug
 
-# Validate existing channels
-python scripts/collect_channels.py --validate-existing
+# Basic discovery system (for simple searches)
+python scripts/collect_channels.py --expand-keywords --max-results 500
 
 # Check API quota status
 python scripts/quota_check.py
@@ -157,12 +172,15 @@ The system features advanced API quota management with multiple key support:
 
 ## 📈 Features
 
-### 🚀 Advanced Channel Discovery
-- **Intelligent Keyword Expansion**: 20 base keywords → 500+ validated keywords
-- **Multi-Strategy Discovery**: Keyword-based, location-based, trending content
-- **Sri Lankan Relevance Scoring**: Geographic and cultural indicators
-- **Automatic Categorization**: Maps channels to content categories
-- **Unlimited Scalability**: Discover 1000+ channels across all categories
+### 🚀 Enhanced Advanced Channel Discovery
+- **Intelligent Keyword Expansion**: YouTube autocomplete integration + 500+ validated keywords
+- **Multi-Strategy Discovery**: 6 advanced techniques (long-tail, hashtags, comments, playlists, geo-targeting, popular videos)
+- **Sri Lankan Relevance Scoring**: Geographic and cultural indicators with smart filtering
+- **Smart Channel Categorization**: Analyzes video content for accurate categorization
+- **Keyword Performance Tracking**: Learns and optimizes keyword effectiveness over time
+- **Debug Mode**: Detailed logging for troubleshooting and optimization
+- **Enhanced Deduplication**: Advanced validation with comprehensive duplicate detection
+- **Unlimited Scalability**: Discover 1000+ channels across all categories efficiently
 
 ### 🔄 Automated Data Collection
 - **Multi-API Key Support**: Automatic rotation for higher quotas (30,000+ units/day)
@@ -454,11 +472,14 @@ python scripts/process_data.py --validate-only
 - **[API Key Management](docs/API_KEY_ROTATION_FIX.md)**: Multi-key rotation system details
 - **[Quota Management](docs/API_QUOTA_MANAGEMENT.md)**: API optimization strategies
 - **[Channel Discovery](docs/CHANNEL_DISCOVERY_GUIDE.md)**: Advanced discovery system guide
+- **[Channel Discovery Analysis](docs/CHANNEL_DISCOVERY_ANALYSIS.md)**: ⭐ **NEW** - Analysis & solutions for duplicate detection
 
 ### Quick Reference
 
 | Task | Command | Documentation |
 |------|---------|---------------|
+| **Advanced Discovery** | `python scripts/advanced_channel_discovery.py --target 50` | [Channel Discovery Analysis](docs/CHANNEL_DISCOVERY_ANALYSIS.md) |
+| **Test Deduplication** | `python scripts/test_deduplication_fix.py` | [Channel Discovery Analysis](docs/CHANNEL_DISCOVERY_ANALYSIS.md) |
 | **Channel Discovery** | `python scripts/collect_channels.py --expand-keywords` | [Channel Discovery Guide](docs/CHANNEL_DISCOVERY_GUIDE.md) |
 | **Video Collection** | `python scripts/collect_videos.py --max-videos 100` | [System Architecture](docs/SYSTEM_ARCHITECTURE.md) |
 | **Feature Engineering** | `python scripts/process_data.py` | [Feature Engineering Guide](docs/FEATURE_ENGINEERING_GUIDE.md) |
