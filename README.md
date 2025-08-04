@@ -150,6 +150,9 @@ python scripts/scheduler.py --daemon
 
 ### Advanced Discovery Commands
 ```bash
+# 🚀 NEW: Unlimited Discovery System (10,000+ channels)
+python scripts/unlimited_channel_discovery.py --target 10000 --debug
+
 # Production-ready discovery with progressive saving
 python scripts/channel_discovery.py --target 100 --debug
 

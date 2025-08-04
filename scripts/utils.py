@@ -291,6 +291,11 @@ class YouTubeAPIClient:
         self.key_quotas = {key: 0 for key in self.api_keys}
         self.exhausted_keys.clear()
         logger.info("Quota tracking reset")
+    
+    def reset_exhausted_keys(self):
+        """Reset exhausted keys tracking for fresh session"""
+        self.exhausted_keys.clear()
+        logger.info("Exhausted keys tracking reset")
 
 # YouTube API Helper Functions
 def get_channel_info(client: YouTubeAPIClient, channel_ids: List[str]) -> List[Dict]:
