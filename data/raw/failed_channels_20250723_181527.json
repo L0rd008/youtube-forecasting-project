@@ -1,0 +1,42 @@
+[
+  {
+    "channel_id": "UC3aHg03ut7j87ACMxy215_Q",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:18.996271"
+  },
+  {
+    "channel_id": "UCyzPvmM5qpGmAb48SXcikiw",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:20.048689"
+  },
+  {
+    "channel_id": "UCAo_wAxH1WT6rFmK5yCd1Cg",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:21.025371"
+  },
+  {
+    "channel_id": "UC0jl0-twIcRptNHGnINyk9Q",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:21.891921"
+  },
+  {
+    "channel_id": "UCJA-NQ4MtcRIog66wziD8fA",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:23.857919"
+  },
+  {
+    "channel_id": "UCl4MonVoWRx3HqAh3Efw2Jg",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:24.871586"
+  },
+  {
+    "channel_id": "UCrcATWZGF_p53r38i6VK0eA",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:25.884718"
+  },
+  {
+    "channel_id": "UCHySsgSdKQ3Ssq7lEN4i2-w",
+    "error": "API quota exceeded. Please try again tomorrow.",
+    "timestamp": "2025-07-23T18:15:27.128867"
+  }
+]

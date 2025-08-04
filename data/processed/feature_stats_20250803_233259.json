@@ -1,0 +1,332 @@
+{
+  "total_videos": 3310,
+  "date_range": {
+    "start": "2015-12-18T13:50:02+00:00",
+    "end": "2025-08-03T17:31:26+00:00"
+  },
+  "numeric_features": {
+    "category_id": {
+      "mean": 20.913293051359517,
+      "std": 4.824452771757075,
+      "min": 1.0,
+      "max": 27.0,
+      "median": 22.0,
+      "missing_count": 0
+    },
+    "view_count": {
+      "mean": 222593.9580060423,
+      "std": 946609.5969247305,
+      "min": 2.0,
+      "max": 26514897.0,
+      "median": 28166.0,
+      "missing_count": 0
+    },
+    "like_count": {
+      "mean": 6843.451057401812,
+      "std": 18739.800561967528,
+      "min": 0.0,
+      "max": 368664.0,
+      "median": 1104.5,
+      "missing_count": 0
+    },
+    "comment_count": {
+      "mean": 375.70876132930516,
+      "std": 1222.936426618199,
+      "min": 0.0,
+      "max": 24693.0,
+      "median": 46.0,
+      "missing_count": 0
+    },
+    "duration_seconds": {
+      "mean": 699.7619335347432,
+      "std": 1380.6225865983265,
+      "min": 10.0,
+      "max": 14372.0,
+      "median": 169.5,
+      "missing_count": 0
+    },
+    "title_length": {
+      "mean": 59.28277945619335,
+      "std": 24.98396777219116,
+      "min": 1.0,
+      "max": 100.0,
+      "median": 59.0,
+      "missing_count": 0
+    },
+    "description_length": {
+      "mean": 386.70785498489425,
+      "std": 499.85820851281403,
+      "min": 0.0,
+      "max": 4757.0,
+      "median": 286.0,
+      "missing_count": 0
+    },
+    "tag_count": {
+      "mean": 10.744712990936556,
+      "std": 11.915630709543148,
+      "min": 0.0,
+      "max": 58.0,
+      "median": 8.0,
+      "missing_count": 0
+    },
+    "like_ratio": {
+      "mean": 0.04390446682988716,
+      "std": 0.03387830862386101,
+      "min": 0.0,
+      "max": 0.36363636363636365,
+      "median": 0.03838976652846719,
+      "missing_count": 0
+    },
+    "comment_ratio": {
+      "mean": 0.003217324437322757,
+      "std": 0.005196524866290122,
+      "min": 0.0,
+      "max": 0.07142857142857142,
+      "median": 0.0012106907052614859,
+      "missing_count": 0
+    },
+    "engagement_ratio": {
+      "mean": 0.047121791267209924,
+      "std": 0.03659139565758594,
+      "min": 0.0,
+      "max": 0.36363636363636365,
+      "median": 0.04039009967075918,
+      "missing_count": 0
+    },
+    "title_word_count": {
+      "mean": 9.677341389728097,
+      "std": 4.33088246720754,
+      "min": 1.0,
+      "max": 22.0,
+      "median": 9.0,
+      "missing_count": 0
+    },
+    "description_word_count": {
+      "mean": 47.522054380664656,
+      "std": 68.71625139962089,
+      "min": 0.0,
+      "max": 788.0,
+      "median": 34.0,
+      "missing_count": 0
+    },
+    "duration_minutes": {
+      "mean": 11.66269889224572,
+      "std": 23.01037644330544,
+      "min": 0.16666666666666666,
+      "max": 239.53333333333333,
+      "median": 2.825,
+      "missing_count": 0
+    },
+    "subscriber_count": {
+      "mean": 968924.8126888218,
+      "std": 1636836.0197476645,
+      "min": 1520.0,
+      "max": 5920000.0,
+      "median": 284000.0,
+      "missing_count": 0
+    },
+    "video_count": {
+      "mean": 6641.150151057402,
+      "std": 14593.184734808696,
+      "min": 4.0,
+      "max": 51488.0,
+      "median": 275.0,
+      "missing_count": 0
+    },
+    "avg_views_per_video": {
+      "mean": 264721.99530733575,
+      "std": 493339.2752080256,
+      "min": 487.3333333333333,
+      "max": 2935197.701149425,
+      "median": 121088.32,
+      "missing_count": 0
+    },
+    "year": {
+      "mean": 2023.7577039274925,
+      "std": 1.8219041435611971,
+      "min": 2015.0,
+      "max": 2025.0,
+      "median": 2024.0,
+      "missing_count": 0
+    },
+    "month": {
+      "mean": 6.261933534743203,
+      "std": 3.0464274726538485,
+      "min": 1.0,
+      "max": 12.0,
+      "median": 7.0,
+      "missing_count": 0
+    },
+    "day": {
+      "mean": 15.907552870090635,
+      "std": 9.966303323075481,
+      "min": 1.0,
+      "max": 31.0,
+      "median": 16.0,
+      "missing_count": 0
+    },
+    "hour": {
+      "mean": 15.002416918429002,
+      "std": 4.889655193688186,
+      "min": 0.0,
+      "max": 23.0,
+      "median": 16.0,
+      "missing_count": 0
+    },
+    "day_of_week": {
+      "mean": 3.248640483383686,
+      "std": 1.9594228310442685,
+      "min": 0.0,
+      "max": 6.0,
+      "median": 3.0,
+      "missing_count": 0
+    },
+    "day_of_year": {
+      "mean": 175.25407854984894,
+      "std": 92.61123002882682,
+      "min": 1.0,
+      "max": 366.0,
+      "median": 191.0,
+      "missing_count": 0
+    },
+    "week_of_year": {
+      "mean": 25.49274924471299,
+      "std": 13.164594012112156,
+      "min": 1.0,
+      "max": 53.0,
+      "median": 28.0,
+      "missing_count": 0
+    },
+    "quarter": {
+      "mean": 2.44773413897281,
+      "std": 1.0229251909206731,
+      "min": 1.0,
+      "max": 4.0,
+      "median": 3.0,
+      "missing_count": 0
+    },
+    "days_since_published": {
+      "mean": 493.79456193353474,
+      "std": 657.4226695403353,
+      "min": 0.0,
+      "max": 3516.0,
+      "median": 221.0,
+      "missing_count": 0
+    },
+    "weeks_since_published": {
+      "mean": 70.54208027621925,
+      "std": 93.91752422004791,
+      "min": 0.0,
+      "max": 502.2857142857143,
+      "median": 31.571428571428573,
+      "missing_count": 0
+    },
+    "title_sentiment_polarity": {
+      "mean": 0.03586263258393167,
+      "std": 0.16090347936559077,
+      "min": -0.8,
+      "max": 1.0,
+      "median": 0.0,
+      "missing_count": 0
+    },
+    "title_sentiment_subjectivity": {
+      "mean": 0.09234394713208913,
+      "std": 0.23605384902076765,
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.0,
+      "missing_count": 0
+    },
+    "title_exclamation_count": {
+      "mean": 0.12114803625377643,
+      "std": 0.5639571251464028,
+      "min": 0.0,
+      "max": 16.0,
+      "median": 0.0,
+      "missing_count": 0
+    },
+    "title_question_count": {
+      "mean": 0.06767371601208459,
+      "std": 0.3045147776505818,
+      "min": 0.0,
+      "max": 6.0,
+      "median": 0.0,
+      "missing_count": 0
+    },
+    "title_caps_ratio": {
+      "mean": 0.0702173548086769,
+      "std": 0.09169048995987093,
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.05102040816326531,
+      "missing_count": 0
+    },
+    "is_viral": {
+      "mean": 0.29667673716012083,
+      "std": 0.456861805153801,
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.0,
+      "missing_count": 0
+    },
+    "view_score": {
+      "mean": 0.008394977917357105,
+      "std": 0.03570105018046387,
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.0010621954188391092,
+      "missing_count": 0
+    },
+    "engagement_score": {
+      "mean": 0.1295849259848273,
+      "std": 0.10062633805836133,
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.11107277409458774,
+      "missing_count": 0
+    },
+    "success_score": {
+      "mean": 0.04475196233759815,
+      "std": 0.0373277964209275,
+      "min": 0.0,
+      "max": 0.7081116962999442,
+      "median": 0.040236015875176584,
+      "missing_count": 0
+    }
+  },
+  "categorical_features": {
+    "viewership_category": {
+      "low": 828,
+      "medium_low": 827,
+      "medium_high": 827,
+      "high": 497,
+      "viral": 331
+    },
+    "engagement_level": {
+      "medium": 1126,
+      "high": 1092,
+      "low": 980
+    },
+    "category_name": {
+      "Entertainment": 950,
+      "People & Blogs": 809,
+      "Music": 398,
+      "Travel & Events": 347,
+      "Education": 272,
+      "Sports": 265,
+      "News & Politics": 158,
+      "Gaming": 88,
+      "Comedy": 10,
+      "Howto & Style": 10,
+      "Film & Animation": 3
+    },
+    "channel_category": {
+      "vlogs_lifestyle": 1187,
+      "entertainment": 673,
+      "education": 482,
+      "music": 415,
+      "news_media": 283,
+      "sports": 270
+    }
+  }
+}

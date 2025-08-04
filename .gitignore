@@ -7,10 +7,10 @@ config/secrets.py
 secrets/
 
 # Data files
-data/raw/*.csv
-data/raw/*.json
-data/processed/*.csv
-data/processed/*.json
+# data/raw/*.csv
+# data/raw/*.json
+# data/processed/*.csv
+# data/processed/*.json
 data/snapshots/*.csv
 data/snapshots/*.json
 data/logs/*.log

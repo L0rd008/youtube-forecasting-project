@@ -1,0 +1,13 @@
+{
+  "session_id": "20250731_135738",
+  "total_discovered": 2706,
+  "total_validated": 714,
+  "total_sessions": 0,
+  "strategies_used": [
+    "keyword_search"
+  ],
+  "last_strategy": "keyword_search",
+  "last_updated": "2025-08-03T22:44:35.334435",
+  "quota_exhausted_count": 0,
+  "daily_targets_met": 0
+}

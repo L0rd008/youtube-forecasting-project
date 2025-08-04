@@ -1,0 +1,42 @@
+{
+  "keyword_search": {
+    "weight": 2.0,
+    "success_rate": 1.6730769230769231,
+    "last_used": "2025-08-03T22:44:34.118538"
+  },
+  "long_tail_keywords": {
+    "weight": 0.1,
+    "success_rate": 0.0,
+    "last_used": "2025-07-30T22:21:59.516296"
+  },
+  "trending_hashtags": {
+    "weight": 0.1,
+    "success_rate": 0.0,
+    "last_used": "2025-07-30T22:57:50.553419"
+  },
+  "popular_videos": {
+    "weight": 0.1,
+    "success_rate": 0.0,
+    "last_used": "2025-07-31T01:58:19.053549"
+  },
+  "comment_mining": {
+    "weight": 1.0,
+    "success_rate": 0.0,
+    "last_used": null
+  },
+  "playlist_discovery": {
+    "weight": 1.0,
+    "success_rate": 0.0,
+    "last_used": null
+  },
+  "micro_geographic": {
+    "weight": 1.0,
+    "success_rate": 0.0,
+    "last_used": null
+  },
+  "autocomplete_expansion": {
+    "weight": 1.0,
+    "success_rate": 0.0,
+    "last_used": null
+  }
+}
